@@ -47,9 +47,6 @@ def vectorize(text):
     return tfidf_vectorizer.transform(text)
 
 def predict_tags(text):
-    filename_rfc_tfidf = './models/rfc_cv_tfidf.pkl'
-    rfc_tfidf = pickle.load(open(filename_rfc_tfidf, 'rb'))
-
     filename_multilabel_bin = './models/multilabel_bin.pkl'
     multilabel_bin = pickle.load(open(filename_multilabel_bin, 'rb'))
 
@@ -60,7 +57,7 @@ def predict_tags(text):
     text = pd.Series([text])
 
     vectorized_text = vectorize(text)
-    y_pred = rfc_tfidf.predict(vectorized_text)
+    y_pred = logistic_reg.predict(vectorized_text)
     res = multilabel_bin.inverse_transform(y_pred)
     res = list({tag for tag_list in res for tag in tag_list if (len(tag_list) != 0)})
         
