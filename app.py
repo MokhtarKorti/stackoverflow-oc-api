@@ -4,10 +4,14 @@ from utils import *
 
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET'])
+@app.route('/')
 
 def index():
+    return ""
+    
 
+@app.route("/predict", methods=["GET"])
+def predict():
     titre = request.form.get('title')
     corps = request.form.get('body')
     question = titre + ' ' + corps
