@@ -9,7 +9,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import pickle
 
-
+spacy.cli.download("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
 pos_list = ["NOUN", "PROPN"]
 
@@ -47,6 +47,7 @@ def vectorize(text):
     return tfidf_vectorizer.transform(text)
 
 def predict_tags(text):
+
     filename_multilabel_bin = './models/multilabel_bin.pkl'
     multilabel_bin = pickle.load(open(filename_multilabel_bin, 'rb'))
 
